@@ -1,0 +1,113 @@
+Q)What are the differences between file management system(FMS) and Database Managements Systems(DBMS)
+-------------------------------------------------------------------------------------------------------
+
+1) high data redundancy (duplicate data).     1)Reduce data redundancy
+
+2)Difficult to maintain and update            2)Easy to maintain and update 
+
+3)Security is limited                         3)Provides strong security mechanism 
+
+4)data sharing is difficult                   4)multiple users can access data simultaneously
+
+5)No relationship between files               5)supports relationship between tables
+
+6)backup and recovery is difficult            6)Provides backup and recovery features.
+
+7)Suitable for small applications             7)Suitable for small, medium, larger applications 
+---------------------------------------------------------------------------------------------------------------
+Q)Differences between file management system(FMS) and Database Managements Systems(DBMS)
+
+Ans)a file system store data in separate files may lead to data 
+redundancy, and security issues. A DBMS stores data in a structured manner using tables,
+reduces redundancy, provides security, supports multiple users, and ensures 
+data consistency and integrity
+-----------------------------------------------------------------------------------------------------
+Q)What is Data, Field, Record, Database?
+
+Ans) Data:- The data means raw facts without context
+     example:101,malli,6000,hyd
+     
+     Field:- Smallest unit of data in database(column/attribute)
+     example: empid , Empname, empsalary, empaddress
+    
+     record:- Collections of related fields(row/tuple)
+     example:(101,malli,6000,hyd)
+
+     database:-Organized collection of related records stored together.
+     example: in employee database contain all employee details.
+-------------------------------------------------------------------------------------------------
+Q) What is DBMS?
+
+Ans) DBMS is a software used to create, store, retrieve, update and mange databases...
+-----------------------------------------------------------------------------------------------------
+
+ Client-server architecture
+====================================================
+
+In Client-server architecture they have 3 components such as:-
+#Client
+#Server
+#Protocol
+
+Client:-The role of the client in Client-server architecture is send request to the server and to get response from the server...
+
+Server:- The role of the server in Client-server architecture is to the request from Clients. If the request is valid request then it will generate some response we can handover that response to client. If the client request is not a valid request then it will raise the errors...
+
+Protocol:- It has a set of rules and regulations. the role of the protocol in Client-server architecture is to send request from Client to Server
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Data Models In DBMS
+------------------------------------
+Def: A data model defines how data is stored, organized and manipulated in a database..
+
+
+Physical Data Model
+------------------------
+Def: Describes how data is physically stored in storage devices 
+audience: Database administrators..
+
+2. Logical Data Model
+-----------------------
+Def: Defines the Structure of data(entities, attributes, relationship)
+independent of physical storage areas 
+
+audience: developers and data base architects
+
+3. Hierarchical Data Model
+----------------------------
+Def: Data is represented as tree structure.(parent child relationship)
+
+Example: company--->departments--->employees
+
+4.Network Data Model 
+----------------------
+Def: Data is represented as graph with records (nodes) and relationship (edges)
+
+Example: Student enrolled in multiple courses, courses teach by multiple professors 
+
+5. Relation Data Model(RDBMS)
+-----------------------------
+Def: Data is stored in tables (relations) with rows (tuples) and columns(attributes)
+
+Example:
+students(id, name, marks, dept_id)
+departments(dept_id, dept_name)
+---------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
