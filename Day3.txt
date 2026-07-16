@@ -1,0 +1,122 @@
+*SQL Identifiers  
+----------------   
+SQL Identifiers are name used to identify database objects such as database names, table names, column names, view names, index names, constraints, triggers, stored procedures....etc....
+
+While we are declaring identifiers we have to follow some rules and regulations..
+--------------------------------------------------------------------------------
+1) The only allowed characters to define identifiers a-z, A-Z, (or) 0-9, _, $..
+2) Must be begin with letter or underscore(_)
+3) We can't declare identifiers with reserved words.
+4) Spaces are not considered to declare identifiers 
+5) identifiers are case sensitive..
+6) max length to declare identifiers are 15 characters
+
+SQL
+==========
+SQL(Structured Query Language) is standardized programming language specially designed for managing manipulating relational databases. It provides a declarative Syntax that allows users to define what data they want retrieve insert, update, pr delete without specifying exactly how database should execute these operations..
+
+SQL Command's
+============================
+Types of SQL commands 
+----------------------
+>
+> DDL-(DATA DEFINITION LANGUAGE)	--> CREATE, ALTER, DROP, TRUNCATE, RENAME.
+
+> DML-(DATA MANIPULATING LANGUAGE) --> INSERT, UPDATE, DELETE...
+
+> DCL(DATA CONTROL LANGUAGE) --> GRANT, REVOKE...
+
+> TCL(Transactions Control Language) --> COMMIT, ROLLBACK, SAVE-POINT..
+
+> DQL(DATA QUERY LANGUAGE) --> SELECT	
+	
+
+DDA(Data definition Language)
+-------------------------------------
+DDL command are used to define, create, modify and delete the structure of a database objects such as database, tables, views, index's, and constraints...
+
+>Create:- By using these command to create  new database a new database, tables, views, indexes, etc................
+>Alter:- By using Alter command we can modify the structure of an existing tables. like(add column, drop column, rename column, modify datatypes, add constraints..
+>Drop:- Deletes an entire database objects permanently like(database, tables, view, index...etc)
+>truncate:- By using truncate command delete all records from a tables without deleting the table.
+>rename:- It is used to rename the database object names..
+
+DML(Data Manipulating Language)
+---------------------------------------
+manages data stored within database objects.
+
+>Insert:- By using Insert command we can insert some records into tables..  
+
+>Update:- by using Update command we can update some records  based on the conditions.
+
+>Delete:- by using delete command we can delete some records based on the conditions.
+
+>Lock:- Controls concurrency 
+
+DCL(Data Control Language)
+----------------------------------------------------
+Manages Permissions and access control on database objects.
+
+>Grant:- Gives specific privileges or permissions (Such as select, update, insert, delete, all privileges) to a database user or role
+
+>Revoke:-Removes previously granted permissions from database user or role. Restricting their access to database objects..
+
+TCL(Transactions Control Language)
+----------------------------------------------------------------
+Manages transactions to maintain data integrity 
+
+>commit:- Permanently saves all the changes made during the current transactions to the database.
+making them visible to other users.
+
+>Rollback: Undoes/reverts changes made during the current transactions back to the last committed state or Save-point in case of an error 
+
+Save-Point
+--------------------------------
+ >Set a temporary within a transactions to you which you can late rollback, without undoing the entire transaction.
+
+DQL(DATA QUERY LANGUAGE)
+--------------------------------
+> Used to fetch or retrieve data from the database....
+
+>Select:- retrieve data from one or more tables or views based on specified columns and conditions..
+it is the most frequently used command in SQL
+--------------------------------------------------------------
+
+Create
+-------
+how to create database:
+------------------------
+syntax: create database  database name;
+example: create database pfs 4;
+-------------------------------------------------------
+how to drop the database
+------------------------
+syntax:
+--------
+drop database database-name;
+example: drop database database-name;
+-----------------------------------------------------------------
+CREATE TABLE 
+================
+CREATE TABLE TABLE-NAME( 
+column-name data-type(size) constraint, 
+column-name data-type(size), 
+column-name data-type(size), 
+column-name data-type(size),
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
