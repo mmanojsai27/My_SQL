@@ -1,2 +1,15 @@
-# My_SQL
-This repository covers MySQL from beginner to advanced concepts. It includes database creation, tables, data types, constraints, CRUD operations, SQL queries,operators,functions,joins,keys,normalization,indexes,views,stored procedures,triggers,transactions, and real-world examples. A complete resource for learning and practicing MySQL step by step.
+🚀 25 Days of MySQL Challenge 🗄️💻
+
+Welcome to my 25 Days of MySQL Challenge! 🎯 This repository documents my journey of learning MySQL from the ground up through 25 days of consistent practice. Throughout this challenge, I explored Database Management Systems (DBMS) 🗃️, Client-Server Architecture 🌐, SQL Fundamentals 📚, DDL, DML, DCL, TCL, and DQL Commands ⚡, database and table creation 🏗️, data types 📝, constraints 🔒, CRUD operations ➕✏️❌, filtering 🔍, sorting 📊, aggregate functions 📈, joins 🔗, subqueries 🧩, views 👀, indexes 🚀, stored procedures ⚙️, triggers 🔔, transactions 🔄, normalization 📋, and database design 🏛️. Each day includes practical SQL queries, real-world examples 💼, and hands-on exercises 💻 to strengthen database concepts and problem-solving skills. Whether you're a beginner 🌱 or looking to refresh your SQL knowledge 🔥, this repository serves as a complete, structured, and practical guide to mastering MySQL one day at a time. Happy Learning! 🚀✨
+
+#MYSQL-DAY1
+🚀 Day 1 – Full Stack Development Basics: This repository introduces the core concepts of Full Stack Development, covering the roles and responsibilities of Frontend 🎨 and Backend ⚙️, the importance of APIs 🔗 in application communication, and different storage types 💾. It also explains File Management Systems (FMS) 📂 and Database Management Systems (DBMS) 🗄️, their advantages, limitations, and how databases solve real-world data management problems. A perfect starting point for beginners exploring web development and databases. 📚
+
+#MYSQL-DAY2
+🚀 Day 2 – MySQL & DBMS Fundamentals: This repository covers essential database concepts such as the differences between File Management System (FMS) 📂 and Database Management System (DBMS) 🗄️, along with Data, Fields, Records, and Databases 📋. It also explains Client-Server Architecture 🌐, communication protocols, and major Data Models 📊 including Physical, Logical, Hierarchical, Network, and Relational (RDBMS). A beginner-friendly guide to building a solid foundation in database management and MySQL. 💻
+
+#MYSQL-DAY3
+🚀 Day 3 – SQL Basics: This repository introduces the fundamentals of Structured Query Language (SQL), covering SQL Identifiers 🏷️, naming rules, and the five categories of SQL commands: DDL 🏗️, DML ✍️, DCL 🔒, TCL 🔄, and DQL 🔍. It includes practical examples of CREATE, ALTER, DROP, TRUNCATE, RENAME, INSERT, UPDATE, DELETE, GRANT, REVOKE, COMMIT, ROLLBACK, SAVEPOINT, and SELECT. You'll also learn how to create databases and tables, making this an excellent resource for beginners starting their MySQL journey. 💾📖
+
+#MYSQL-DAY4
+🚀 Day 4 – MySQL DDL Operations: This repository provides hands-on practice with MySQL Data Definition Language (DDL) commands. Learn how to create databases and tables 🗄️, add ➕, modify ✏️, rename 🔄, and drop ❌ columns, change data types, rename tables, and inspect table structures using DESCRIBE. It also explores MySQL data types such as CHAR, VARCHAR, INT, DATE, DECIMAL, ENUM, SET, and TINYTEXT through real-world employee and company database examples. Perfect for beginners looking to build a strong foundation in MySQL table design and schema management. 💻📚
