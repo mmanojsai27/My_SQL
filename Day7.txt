@@ -1,0 +1,290 @@
+--TCL(TRANSACTION CONTROL LANGUAGE)
+------------------------------------------
+DEF:
+----
+* THE PROCESS OF COMBING ALL RELATED OPERATION INTO A SINGLE UNIT AND EXCUTING THEM ACCORDING TO THE RULE "EITHER ALL OPERATION SHOULD BE SUCCEED OR MORE SHOULD BE SUCCEED", IS CALLED TRANSCATION MANAGEMENT..
+
+* A TRANSCATION I CONSIDERED AS A SINGLE UNIT OF WORK AND FOLLLOWS THE PRINCPLE:
+--> "EITHER ALL OR NONE"
+
+EXAMPLE: FUNDS TRANSFER..
+
+CONSIDER A MONEY TRANSFER PROCESS BETWEEN TWO ACCOUNTS..
+1.DEBIT AMOUNT FROM THE SENDER'S ACCOUNT.
+2.CREDIT AMOUNT INTO THE RECEIVER'S ACCOUNT.
+
+-->BOTH OPERATIONS SHOULD BE EXCUTED AS A SINGLE TRANSACTION..
+
+>>IF THE AMOUNT IS DEBIT FROM THE SENDER'S ACCOUNT SUCCESSFULY BUT CREDITING THE RECOVER'S ACCOUNT FAILS. IT MAY LEAD TO THE DATA INCONSISTENCY PROBLEMS..
+
+>THERE ARE TWO TYPES OF TRANSACTIONS SUCH AS:-
+1) LOCAL TRANSACTION:-
+-----------------------
+IN LOCAL TRANSACTIONS, ALL OPERATIONS OF A TRANSACTION ARE EXECUTED IN THE SAME DATABASE..
+EXAMPLE:-
+--------
+FUNDS TRANSFER FROM ONE ACCOUNT TO ANOTHER ACCOUNT WHERE BOTH ACCOUNTS BELONGS TO THE SAME BANK...
+
+2)GLOBAL TRANSACTION:
+---------------------
+IN GLOBAL TRANSACTION, OPERATIONS OF A TRANSACTION ARE EXECUTED ON DIFFERENT DATABASES..
+EXAMPLE:-
+---------
+FUNDS TRANSFER FROM ONE ACCOUNT TO ANOTHER ACCOUNT WHERE BOTH ACCOUNTS BELONGS TO THE DIFFERENT BANK...
+
+ACID RULES:--
+-------------
+>ATOMICITY(A):-- ALL (OR) NOTHING..
+
+>CONSISTENCY(C):-- THE DATABASE REMAINS IN A VAILD STATE
+
+>ISOLATION(I):-- TRANSACTION DO NOT INTERAFCE WITH EACH OTHER
+
+>DURABILITY(D):-- COMMITTED CHANGES ARE PERMANENT...
+
+WHAT IS LOCKING:-
+---------------
+>>LOCKING IS A MECHANISM USED BY THE DATABASE TO CONTROL CONCURRENT ACCESS DATA..
+
+>>IT ENSURES THAT MULTIPLE USERS ACCESS THE SAME DATA SIMULTANEOUSLY THE DATABASE MAINTAINS CONSISTENCY, INTEGRITY, AND PREVENT CONFLICTS..
+
+1) SHARED LOCK
+----------------
+DEF:- A SHARED LOCK MEANS ALLOWS A TRANSACTION TO READ DATA.
+MULTIPLE TRANSACTIONS CAN HOLD A SHARED LOCK ON THE SAME ROW..
+NO TRANSACTION CAN MODIFY THE ROW UNTIL ALL SHARED LOCKS ARE RELEASED..
+
+*CHARACTERISTICS:-
+-------------------
+READ ONLY 
+MULTIPLE USERS CAN READ SIMULTANEOUSLY
+BLOCKS UPDATES AND DELETES
+-----------------------------------------------------------------------------------
+2) EXCLUSIVE LOCK:-
+DEF:- AN EXCLUSIVE LOCK ALLOWS A TRANSACTION TO MODIFY DATA..
+WHILE AN EXCLUSIVE LOCK EXISTS..
+NO OTHER TRANSACTIONS CAN READ USING A LOCKING READ OR MODIFY THAT ROW..
+ONLY THE TRANSACTION HOLDING THE LOCK CAN UPDATE/DELETE THE DATA..
+
+*CHARACTERISTICS:-
+-------------------
+USED FOR INSERT, UPDATE, DELETE.
+ONLY ONE EXCLUSIVE LOCT AT A TIME.
+BLOCKS BOTH READS(LOCKING READS) AND WRITES
+
+3)INTENT LOCK
+--------------
+AN INTENT LOCK IS A TABLE-LEVEL LOCK THAT INDICATES A TRANSACTION INTENDS TO PLACE ROW-LEVEL.
+IT HELPS MYSQL QUICKLY DETERMINE WHEATHER A TABLE-LEVEL LOCK CONFLICTS WITH EXISTING ROW LOCKS..
+USERS DO NOT USUALLY CREATE INTENT LOCKS MANUALLY INNODB MANAGES THEM AUTOMATICALLY
+
+REAL-TIME EXAMPLE
+IMAGINE A LIBRARY..
+SHARED LOCK -> MANY STUDENTS CAN READ THE SAME BOOK AT THE SAME TIME..
+
+EXCLUSIVE LOCK --> ONE STUDENT BORROWS THE BOOK, SO NOBODY ELSE CAN READ OR BORROW IT UNTIL IT IS RETURNED.
+
+INTENT LOCK --> THE LIBRARIN MARKS THAT SOMEONE IS ABOUT TO READ OR BORROW BOOKS FROM A SHELF, HELPING COORDINATE ACCESS WITHOUT CHECKING EVERY BOOK INDIVIDUALLY..
+=====================================================================================================================
+mysql>
+mysql> tee C:\Users\MANOJ\OneDrive\Desktop\Codegnan MySQL\MySQL_ClassNotes\day7.txt
+Logging to file 'C:\Users\MANOJ\OneDrive\Desktop\Codegnan MySQL\MySQL_ClassNotes\day7.txt'
+mysql> -- TCL(TRANSACTION CONTROL LANGUAGE)
+mysql> USE PFS4;
+Database changed
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_pfs4  |
++-----------------+
+| backupemployees |
+| company_staff   |
+| employees       |
+| products        |
+| students        |
++-----------------+
+5 rows in set (0.11 sec)
+
+mysql> CREATE TABLE EMPLOYEE(
+    -> EMP_ID INT PRIMARY KEY,
+    -> EMP_NAME VARCHAR(30),
+    -> SALARY DECIMAL(10,2)
+    -> );
+Query OK, 0 rows affected (0.18 sec)
+
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(111,'MANOJ',77000);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(222,'AR',87000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM EMPLOYEE;
++--------+----------+----------+
+| EMP_ID | EMP_NAME | SALARY   |
++--------+----------+----------+
+|    111 | MANOJ    | 77000.00 |
+|    222 | AR       | 87000.00 |
++--------+----------+----------+
+2 rows in set (0.02 sec)
+
+mysql>  START TRANSACTION;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> UPDATE EMPLOYEE SET SALARY=90000 WHERE EMP_ID = 111;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM EMPLOYEE;
++--------+----------+----------+
+| EMP_ID | EMP_NAME | SALARY   |
++--------+----------+----------+
+|    111 | MANOJ    | 90000.00 |
+|    222 | AR       | 87000.00 |
++--------+----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM EMPLOYEE;
++--------+----------+----------+
+| EMP_ID | EMP_NAME | SALARY   |
++--------+----------+----------+
+|    111 | MANOJ    | 77000.00 |
+|    222 | AR       | 87000.00 |
++--------+----------+----------+
+2 rows in set (0.00 sec)
+
+mysql>  START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(333,'AM',40000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM EMPLOYEE;
++--------+----------+----------+
+| EMP_ID | EMP_NAME | SALARY   |
++--------+----------+----------+
+|    111 | MANOJ    | 77000.00 |
+|    222 | AR       | 87000.00 |
+|    333 | AM       | 40000.00 |
++--------+----------+----------+
+3 rows in set (0.01 sec)
+
+mysql> UPDATE EMPLOYEE SET SALARY=SALARY+5000 WHERE SALARY<=78000;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> SELECT * FROM EMPLOYEE;
++--------+----------+----------+
+| EMP_ID | EMP_NAME | SALARY   |
++--------+----------+----------+
+|    111 | MANOJ    | 82000.00 |
+|    222 | AR       | 87000.00 |
+|    333 | AM       | 45000.00 |
++--------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> SAVEPOINT S1;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELETE FROM EMPLOYEE WHERE EMP_ID = 111;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM EMPLOYEE;
++--------+----------+----------+
+| EMP_ID | EMP_NAME | SALARY   |
++--------+----------+----------+
+|    111 | MANOJ    | 77000.00 |
+|    222 | AR       | 87000.00 |
++--------+----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> ROLLBACK S1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'S1' at line 1
+mysql> ROLLBACK TO S1;
+ERROR 1305 (42000): SAVEPOINT S1 does not exist
+mysql> CREATE DATABASE LOCK_DEMO;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> USE LOCK_DEMO;
+Database changed
+
+mysql> CREATE TABLE EMPLOYEE(
+    -> EMP_ID INT PRIMARY KEY,
+    -> EMP_NAME VARCHAR(30),
+    -> SALARY DECIMAL(10,2)
+    -> );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> ALTER TABLE EMPLOYEE ADD DEPARTMENT VARCHAR(30) AFTER EMP_NAME;
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEE;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| EMP_ID     | int           | NO   | PRI | NULL    |       |
+| EMP_NAME   | varchar(30)   | YES  |     | NULL    |       |
+| DEPARTMENT | varchar(30)   | YES  |     | NULL    |       |
+| SALARY     | decimal(10,2) | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+4 rows in set (0.04 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    -> (101,'MANOJ','HR',70000),
+    -> (102,'AR','IT',76000),
+    -> (103,'MAHI','SALES',91000),
+    -> (104,'MANU','TESTER',87000);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM EMPLOYEE;
++--------+----------+------------+----------+
+| EMP_ID | EMP_NAME | DEPARTMENT | SALARY   |
++--------+----------+------------+----------+
+|    101 | MANOJ    | HR         | 70000.00 |
+|    102 | AR       | IT         | 76000.00 |
+|    103 | MAHI     | SALES      | 91000.00 |
+|    104 | MANU     | TESTER     | 87000.00 |
++--------+----------+------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> LOCK TABLES EMPLOYEE WRITE;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> UNLOCK TABLES;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT * FROM EMPLOYEE WHERE EMP_ID=101 FOR UPDATE;
++--------+----------+------------+----------+
+| EMP_ID | EMP_NAME | DEPARTMENT | SALARY   |
++--------+----------+------------+----------+
+|    101 | MANOJ    | HR         | 70000.00 |
++--------+----------+------------+----------+
+1 row in set (0.02 sec)
+
+mysql>  START TRANSACTION;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM EMPLOYEE WHERE EMP_ID=101 FOR UPDATE;
++--------+----------+------------+----------+
+| EMP_ID | EMP_NAME | DEPARTMENT | SALARY   |
++--------+----------+------------+----------+
+|    101 | MANOJ    | HR         | 70000.00 |
++--------+----------+------------+----------+
+1 row in set (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
